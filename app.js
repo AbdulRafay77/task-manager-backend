@@ -85,7 +85,12 @@ app.post('/signup', async (req, res) => {
     try{
         const user = await User.create({ email, password });
         const token = createToken(user._id);
-        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+        res.cookie('jwt', token, { 
+            httpOnly: true, 
+            maxAge: maxAge * 1000,
+            sameSite: 'none',
+            secure: true
+        });
         res.status(201).json({ user: user._id });
     }
     catch(err){
@@ -100,7 +105,12 @@ app.post('/login', async (req, res) => {
     try{
         const user = await User.login(email, password);
         const token = createToken(user._id);
-        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+        res.cookie('jwt', token, { 
+            httpOnly: true, 
+            maxAge: maxAge * 1000,
+            sameSite: 'none',
+            secure: true
+        });
         res.status(200).json({ user: user._id });
     }
     catch(err){
@@ -110,7 +120,11 @@ app.post('/login', async (req, res) => {
 });
 
 app.post('/logout', (req, res) => {
-    res.cookie('jwt', '', { httpOnly: true, expires: new Date(0) });
+    res.cookie('jwt', '', { 
+        maxAge: 1,
+        sameSite: 'none',
+        secure: true
+    });
     res.status(200).json({ message: 'Logged out' });
 });
 
