@@ -13,7 +13,7 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors({
-    origin: 'http://task-manager-backend-production-8e1a.up.railway.app',
+    origin: 'http://task-manager-frontend-delta-blond.vercel.app',
     credentials: true
 }));
 
