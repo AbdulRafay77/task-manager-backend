@@ -13,7 +13,7 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors({
-    origin: 'http://task-manager-frontend-delta-blond.vercel.app',
+    origin: ['http://localhost:5173', 'https://task-manager-frontend-delta-blond.vercel.app'],
     credentials: true
 }));
 
